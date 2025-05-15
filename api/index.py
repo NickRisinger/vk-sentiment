@@ -1,11 +1,15 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 import json
 
 app = FastAPI()
 
-@app.get("/api/auth")
-async def handle_auth(payload: Optional[str] = None):
-    data = json.loads(payload)
+class Request(BaseModel):
+    payload: str
+
+@app.post("/api/auth")
+async def handle_auth(request: Request):
+    data = json.loads(request["payload"])
     return data
 
 @app.get("/api/hello")
