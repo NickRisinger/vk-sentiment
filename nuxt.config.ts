@@ -5,5 +5,9 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: "vercel",
+
+    routeRules: {
+      '/api/**': { proxy: '/api/:path*', cors: true },
+    },
   },
 })
